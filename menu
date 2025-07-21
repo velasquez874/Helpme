@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Circular Creativo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .menu-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .center-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .center-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .center-button.active {
+            background: linear-gradient(45deg, #ff4757, #2ed573);
+        }
+
+        .menu-item {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: scale(0);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.2);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .menu-item:nth-child(2) {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+        }
+
+        .menu-item:nth-child(3) {
+            top: 80px;
+            right: 60px;
+        }
+
+        .menu-item:nth-child(4) {
+            bottom: 80px;
+            right: 60px;
+        }
+
+        .menu-item:nth-child(5) {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+        }
+
+        .menu-item:nth-child(6) {
+            bottom: 80px;
+            left: 60px;
+        }
+
+        .menu-item:nth-child(7) {
+            top: 80px;
+            left: 60px;
+        }
+
+        .menu-active .menu-item {
+            transform: scale(1);
+        }
+
+        .menu-active .menu-item:nth-child(2) {
+            transform: translateX(-50%) scale(1);
+            animation: bounceIn 0.6s ease;
+            animation-delay: 0.1s;
+        }
+
+        .menu-active .menu-item:nth-child(3) {
+            animation: bounceIn 0.6s ease;
+            animation-delay: 0.2s;
+        }
+
+        .menu-active .menu-item:nth-child(4) {
+            animation: bounceIn 0.6s ease;
+            animation-delay: 0.3s;
+        }
+
+        .menu-active .menu-item:nth-child(5) {
+            transform: translateX(-50%) scale(1);
+            animation: bounceIn 0.6s ease;
+            animation-delay: 0.4s;
+        }
+
+        .menu-active .menu-item:nth-child(6) {
+            animation: bounceIn 0.6s ease;
+            animation-delay: 0.5s;
+        }
+
+        .menu-active .menu-item:nth-child(7) {
+            animation: bounceIn 0.6s ease;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .title {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
+        }
+
+        .subtitle {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 1.1rem;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Menú Circular Creativo</div>
+    
+    <div class="menu-container" id="menuContainer">
+        <button class="center-button" onclick="toggleMenu()">MENÚ</button>
+        
+        <div class="menu-item">
+            <a href="#inicio">Inicio</a>
+        </div>
+        
+        <div class="menu-item">
+            <a href="#servicios">Servicios</a>
+        </div>
+        
+        <div class="menu-item">
+            <a href="#productos">Productos</a>
+        </div>
+        
+        <div class="menu-item">
+            <a href="#portfolio">Portfolio</a>
+        </div>
+        
+        <div class="menu-item">
+            <a href="#blog">Blog</a>
+        </div>
+        
+        <div class="menu-item">
+            <a href="#contacto">Contacto</a>
+        </div>
+    </div>
+
+    <div class="subtitle">Haz clic en el botón central para activar el menú circular con animaciones sorprendentes</div>
+
+    <script>
+        function toggleMenu() {
+            const menuContainer = document.getElementById('menuContainer');
+            const centerButton = document.querySelector('.center-button');
+            
+            menuContainer.classList.toggle('menu-active');
+            centerButton.classList.toggle('active');
+            
+            if (menuContainer.classList.contains('menu-active')) {
+                centerButton.textContent = '✕';
+            } else {
+                centerButton.textContent = 'MENÚ';
+            }
+        }
+
+        // Cerrar menú al hacer clic en un elemento
+        document.querySelectorAll('.menu-item a').forEach(item => {
+            item.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+    </script>
+</body>
+</html>
